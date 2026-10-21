@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sinamoosazadeh/trading_concept_encyclopedia/schema/legacy-entry.schema.json",
+  "title": "Legacy source entry block",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["legacy_id", "section", "heading", "start_line", "content"],
+  "properties": {
+    "legacy_id": { "type": "string", "pattern": "^LEG-[0-9]{4}$" },
+    "section": { "type": "string", "minLength": 1 },
+    "heading": { "type": "string", "minLength": 1 },
+    "start_line": { "type": "integer", "minimum": 1 },
+    "content": { "type": "string", "minLength": 1 }
+  }
+}
