@@ -1,0 +1,17 @@
+{
+  "manifest_version": "1.0",
+  "artifact_type": "derived_legacy_entry_inventory",
+  "repository_path": "legacy/catalog/legacy_entry_inventory.jsonl",
+  "source_repository_path": "legacy/source/ORIGINAL_SOURCE_FA.md",
+  "source_sha256": "d8855068bf55d2aa740d06d870d9239c068ba51cdc0621bb998980df86b242c6",
+  "extraction_script": "scripts/extract_legacy_catalog.py",
+  "extraction_rule": "^###\\s+\\d+\\s*[.)]",
+  "entry_boundary_rule": "close before next level-2 or any level-3 heading",
+  "trim_policy": "Python str.rstrip() on extracted block content",
+  "record_count": 288,
+  "byte_length": 352482,
+  "sha256": "3561b0115181c76028b6ea249ef653ea2ffcad52d8a459677709a364ce506d13",
+  "first_legacy_id": "LEG-0001",
+  "last_legacy_id": "LEG-0288",
+  "preservation_note": "Derived data is byte-for-byte reproducible from the source under the documented extraction algorithm; it is not a claim of editorial review."
+}
