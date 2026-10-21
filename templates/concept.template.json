@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "id": "replace-with-stable-slug",
+  "canonical_name": "Replace with a neutral concept name",
+  "aliases": [],
+  "language": "en",
+  "category": "other",
+  "summary": "Brief neutral summary; do not imply predictive power.",
+  "definition": {
+    "description": "Define the concept without adding an unsupported performance claim.",
+    "operationalization": null,
+    "decision_timing": null,
+    "parameters": [],
+    "discretionary_elements": []
+  },
+  "editorial_status": "candidate",
+  "evidence_status": "unassessed",
+  "contexts": [],
+  "claims": [],
+  "sources": [],
+  "related_concepts": [],
+  "limitations": ["No evidence review has yet been completed."],
+  "review_notes": [],
+  "change_log": [
+    {
+      "date": "2026-10-21",
+      "change": "Created from canonical template.",
+      "rationale": "Start with a traceable and explicitly provisional record."
+    }
+  ]
+}
