@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trading-concept-encyclopedia/schema/claim.schema.json",
+  "title": "Trading concept claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "concept_id", "statement", "claim_type", "status", "scope", "supporting_source_ids", "contrary_source_ids", "review_notes"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "concept_id": { "type": "string", "minLength": 1 },
+    "statement": { "type": "string", "minLength": 1 },
+    "claim_type": { "type": "string", "enum": ["descriptive", "historical", "causal", "predictive", "empirical", "methodological"] },
+    "status": { "type": "string", "enum": ["unreviewed", "supported", "contested", "unsupported"] },
+    "scope": { "type": "string", "minLength": 1 },
+    "supporting_source_ids": { "type": "array", "items": { "type": "string" } },
+    "contrary_source_ids": { "type": "array", "items": { "type": "string" } },
+    "review_notes": { "type": "array", "items": { "type": "string" } }
+  }
+}
