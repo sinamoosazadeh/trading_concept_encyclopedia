@@ -9,7 +9,7 @@
     "schema_version": { "const": "1.0" },
     "sources": {
       "type": "array",
-      "items": { "$ref": "source.schema.json" }
+      "items": { "type": "object" }
     },
     "notes": { "type": "string" }
   }
