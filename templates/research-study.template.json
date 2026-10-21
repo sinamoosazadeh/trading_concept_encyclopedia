@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "id": "replace-with-stable-study-id",
+  "title": "Study title",
+  "study_status": "proposal",
+  "study_type": "exploratory",
+  "hypothesis": {
+    "statement": "State the falsifiable primary hypothesis.",
+    "null_or_counter_hypothesis": "State the null or competing explanation.",
+    "primary_outcome": "Specify the primary outcome and exact calculation.",
+    "failure_criterion": "Specify in advance what result would fail to support the hypothesis.",
+    "preregistered_at": null
+  },
+  "scope": {
+    "market": "Specify market type.",
+    "venue": null,
+    "instruments": [],
+    "timeframes": [],
+    "start_date_utc": null,
+    "end_date_utc": null,
+    "universe_selection_rule": "Describe universe construction and any survivorship limitations."
+  },
+  "protocol": {
+    "version": "1.0",
+    "decision_timing": "Specify which information is available at each decision time.",
+    "signal_definition": "Describe the operational rule.",
+    "splitting_method": "Specify chronological train/validation/test or another justified design.",
+    "baseline": "Specify the baseline and why it is meaningful.",
+    "parameter_search": "Describe all tested variants, ranges, and multiplicity handling.",
+    "cost_model": "Describe fees, spread, slippage, funding, latency, liquidity, and fill assumptions.",
+    "deviations": []
+  },
+  "data": {
+    "source_ids": [],
+    "snapshot_identifier": null,
+    "timestamp_policy": "Specify UTC event-time rules and data availability.",
+    "known_gaps": [],
+    "rights_note": "State use and redistribution rights or unresolved limitations.",
+    "data_hash": null,
+    "schema_version": null
+  },
+  "evaluation": {
+    "metrics": [],
+    "uncertainty_method": "Specify uncertainty intervals or why not applicable.",
+    "sample_counts": {},
+    "out_of_sample_policy": "Specify how held-out data is protected from selection.",
+    "benchmark_results": "",
+    "aggregation_policy": ""
+  },
+  "bias_review": {
+    "look_ahead": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "leakage": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "survivorship": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "selection": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "multiple_testing": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "execution_realism": {"status": "not_assessed", "mitigation": "", "residual_risk": ""},
+    "notes": []
+  },
+  "results": {
+    "summary": "No results; proposal only.",
+    "supports_hypothesis": null,
+    "metrics": {},
+    "negative_findings": [],
+    "claim_scope": "No empirical conclusion is available.",
+    "uncertainty": ""
+  },
+  "reproducibility": {
+    "code_revision": null,
+    "environment": "Not yet specified.",
+    "command": null,
+    "configuration_reference": null,
+    "random_seed": null,
+    "reproducibility_limits": ["Study has not been run."]
+  },
+  "limitations": ["Proposal template only; no study has been executed."],
+  "related_concept_ids": [],
+  "source_ids": [],
+  "change_log": [
+    {
+      "date": "2026-10-21",
+      "change": "Created from the empirical study template.",
+      "rationale": "Require explicit scope, bias review, negative findings, and reproducibility."
+    }
+  ]
+}
