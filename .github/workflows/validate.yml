@@ -32,6 +32,8 @@ jobs:
         run: python -m pytest
       - name: Validate canonical registry
         run: python scripts/validate_registry.py --json
+      - name: Verify preserved source integrity
+        run: python scripts/verify_source_manifest.py
       - name: Generate deterministic metadata report
         shell: bash
         run: |
