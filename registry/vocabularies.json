@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "concept_categories": [
+    "market_structure",
+    "chart_pattern",
+    "candlestick_pattern",
+    "indicator",
+    "feature",
+    "signal",
+    "setup",
+    "strategy",
+    "execution",
+    "risk_management",
+    "portfolio",
+    "microstructure",
+    "data_methodology",
+    "other"
+  ],
+  "editorial_statuses": [
+    "candidate",
+    "draft",
+    "needs_sources",
+    "under_review",
+    "reviewed",
+    "deprecated",
+    "merged"
+  ],
+  "evidence_statuses": [
+    "unassessed",
+    "descriptive_only",
+    "mixed",
+    "empirical_support",
+    "empirical_null",
+    "contested",
+    "insufficient_evidence"
+  ],
+  "claim_types": [
+    "descriptive",
+    "historical",
+    "causal",
+    "predictive",
+    "empirical",
+    "methodological"
+  ],
+  "claim_statuses": [
+    "unreviewed",
+    "supported",
+    "contested",
+    "unsupported"
+  ],
+  "source_types": [
+    "primary_artifact",
+    "peer_reviewed_research",
+    "formal_research",
+    "technical_documentation",
+    "specialist_book",
+    "secondary_analysis",
+    "practitioner_material",
+    "informal_discussion",
+    "market_data",
+    "other"
+  ],
+  "relationship_types": [
+    "synonym",
+    "broader_than",
+    "narrower_than",
+    "prerequisite_for",
+    "alternative_to",
+    "often_confused_with",
+    "implemented_as",
+    "related_to"
+  ]
+}
