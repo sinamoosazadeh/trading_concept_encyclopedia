@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trading-concept-encyclopedia/schema/concept.schema.json",
+  "title": "Trading concept entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "canonical_name", "aliases", "language",
+    "category", "summary", "definition", "editorial_status",
+    "evidence_status", "contexts", "claims", "sources",
+    "related_concepts", "limitations", "change_log"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "canonical_name": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "aliases": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "language": { "type": "string", "enum": ["en", "fa", "mixed"] },
+    "category": {
+      "type": "string",
+      "enum": [
+        "market_structure", "chart_pattern", "candlestick_pattern", "indicator",
+        "feature", "signal", "setup", "strategy", "execution", "risk_management",
+        "portfolio", "microstructure", "data_methodology", "other"
+      ]
+    },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "operationalization"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1 },
+        "operationalization": { "type": ["string", "null"] },
+        "decision_timing": { "type": ["string", "null"] },
+        "parameters": { "type": "array", "items": { "type": "string" } },
+        "discretionary_elements": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "editorial_status": {
+      "type": "string",
+      "enum": ["candidate", "draft", "needs_sources", "under_review", "reviewed", "deprecated", "merged"]
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": ["unassessed", "descriptive_only", "mixed", "empirical_support", "empirical_null", "contested", "insufficient_evidence"]
+    },
+    "contexts": { "type": "array", "items": { "type": "string" } },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "type", "status", "scope", "supporting_source_ids", "contrary_source_ids"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "statement": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "enum": ["descriptive", "historical", "causal", "predictive", "empirical", "methodological"] },
+          "status": { "type": "string", "enum": ["unreviewed", "supported", "contested", "unsupported"] },
+          "scope": { "type": "string", "minLength": 1 },
+          "supporting_source_ids": { "type": "array", "items": { "type": "string" } },
+          "contrary_source_ids": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "sources": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "related_concepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "relationship", "rationale"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "relationship": { "type": "string", "enum": ["synonym", "broader_than", "narrower_than", "prerequisite_for", "alternative_to", "often_confused_with", "implemented_as", "related_to"] },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "review_notes": { "type": "array", "items": { "type": "string" } },
+    "change_log": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "change", "rationale"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "change": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
