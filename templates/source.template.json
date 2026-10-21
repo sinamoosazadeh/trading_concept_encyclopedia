@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "id": "replace-with-stable-source-id",
+  "title": "Source title",
+  "creator": null,
+  "publication_date": null,
+  "accessed_at": null,
+  "url": null,
+  "source_type": "other",
+  "source_level": "other",
+  "relevance_note": "State which specific claim or definition this source supports, and how directly it supports it.",
+  "limitations": ["Record known scope, methodology, access, or rights limitations."]
+}
