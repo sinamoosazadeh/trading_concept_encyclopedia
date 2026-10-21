@@ -8,7 +8,6 @@ version = "0.1.0"
 description = "Evidence-first, version-controlled trading concept reference"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "Proprietary until a repository license is selected" }
 dependencies = []
 
 [project.optional-dependencies]
