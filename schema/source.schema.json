@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trading-concept-encyclopedia/schema/source.schema.json",
+  "title": "Research source record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "title", "source_type", "source_level", "publication_date", "accessed_at", "url", "relevance_note"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "creator": { "type": ["string", "null"] },
+    "publication_date": { "type": ["string", "null"] },
+    "accessed_at": { "type": ["string", "null"], "format": "date" },
+    "url": { "type": ["string", "null"] },
+    "source_type": {
+      "type": "string",
+      "enum": ["primary_artifact", "peer_reviewed_research", "formal_research", "technical_documentation", "specialist_book", "secondary_analysis", "practitioner_material", "informal_discussion", "market_data", "other"]
+    },
+    "source_level": { "type": "string", "enum": ["primary", "formal_research", "technical_reference", "secondary", "practitioner", "other"] },
+    "relevance_note": { "type": "string", "minLength": 1 },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  }
+}
