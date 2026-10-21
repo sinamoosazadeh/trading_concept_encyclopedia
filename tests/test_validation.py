@@ -192,3 +192,28 @@ def test_diagnostics_are_deterministically_sorted(tmp_path):
         {"error": 0, "warning": 1, "info": 2}.get(item["severity"], 9),
         item["path"], item["code"], item["message"]
     ))
+
+
+
+def test_preserved_source_matches_integrity_manifest():
+    import hashlib
+
+    manifest_path = ROOT / "legacy" / "source" / "source_manifest.json"
+    manifest = load_json(manifest_path)
+    source_path = ROOT / manifest["repository_path"]
+    raw = source_path.read_bytes()
+    decoded = raw.decode("utf-8")
+    assert hashlib.sha256(raw).hexdigest() == manifest["sha256"]
+    assert len(raw) == manifest["byte_length"]
+    assert len(decoded) == manifest["unicode_character_count"]
+    assert len(decoded.splitlines()) == manifest["line_count"]
+
+
+def test_source_registry_container_schema_and_source_schema_are_separate():
+    import json
+
+    container_schema = load_json(ROOT / "schema" / "source-registry.schema.json")
+    source_schema = load_json(ROOT / "schema" / "source.schema.json")
+    assert container_schema["properties"]["sources"]["type"] == "array"
+    assert source_schema["required"]
+    assert "source_type" in source_schema["required"]
