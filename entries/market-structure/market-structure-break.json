@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "market-structure-break",
+  "canonical_name": "Market structure break",
+  "aliases": ["structure break"],
+  "language": "en",
+  "category": "market_structure",
+  "summary": "A label used by some trading frameworks for price movement beyond a previously identified structural reference. Exact rules vary across frameworks.",
+  "definition": {
+    "description": "A provisional descriptive concept for a price move that crosses a previously identified swing or structural level. This record does not assume that the move predicts continuation, reversal, or profitable trades.",
+    "operationalization": "Not yet standardized. A reproducible implementation must define how swing points are identified, whether levels use wicks or closes, when the level becomes known, and how intrabar crossings are handled.",
+    "decision_timing": "Unspecified until a particular implementation defines confirmation and availability time.",
+    "parameters": ["swing identification rule", "level-crossing rule", "confirmation rule", "timeframe"],
+    "discretionary_elements": ["structural significance", "swing selection in discretionary approaches"]
+  },
+  "editorial_status": "candidate",
+  "evidence_status": "unassessed",
+  "contexts": ["price action", "market structure analysis"],
+  "claims": [
+    {
+      "id": "market-structure-break-definitions-vary",
+      "statement": "The phrase is used with differing operational definitions across trading frameworks.",
+      "type": "descriptive",
+      "status": "unreviewed",
+      "scope": "Provisional editorial observation; requires source review before being marked supported.",
+      "supporting_source_ids": [],
+      "contrary_source_ids": [],
+      "notes": "Do not present this statement as a completed literature review."
+    }
+  ],
+  "sources": [],
+  "related_concepts": [],
+  "limitations": [
+    "No source review has yet been completed for this entry.",
+    "The entry is a terminology exemplar, not evidence of predictive power.",
+    "No trading rule, backtest, or execution assumption is supplied."
+  ],
+  "review_notes": [
+    "Provisional example used to exercise the schema and validator.",
+    "Requires literature review and operational-definition comparison before promotion."
+  ],
+  "change_log": [
+    {
+      "date": "2026-10-21",
+      "change": "Created provisional schema exemplar.",
+      "rationale": "Exercise entry structure without implying empirical validation."
+    }
+  ]
+}
