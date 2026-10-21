@@ -1,0 +1,19 @@
+{
+  "manifest_version": "1.0",
+  "artifact_type": "original_encyclopedia_source",
+  "repository_path": "legacy/source/ORIGINAL_SOURCE_FA.md",
+  "original_library_filename": "دانشنامه_جامع_الگوها_و_ستاپ‌های_معاملاتی.md",
+  "original_archive_filename": "Trading_Encyclopedia_Independent_Edition_0.1.zip",
+  "original_archive_sha256": "bdae0a61cda5b3db0a59f16395090eeda08727196074620224dd4abb03504454",
+  "sha256": "d8855068bf55d2aa740d06d870d9239c068ba51cdc0621bb998980df86b242c6",
+  "byte_length": 332480,
+  "unicode_character_count": 205813,
+  "line_count": 2926,
+  "numbered_level_3_entry_blocks_in_source_audit": 288,
+  "level_2_heading_count_in_source_audit": 32,
+  "all_level_3_heading_count_in_source_audit": 301,
+  "preservation_status": "sha256_verified",
+  "transformation": "none; original UTF-8 text preserved without editorial changes",
+  "verification_command": "python scripts/verify_source_manifest.py",
+  "interpretation_note": "The counts are source-inventory metadata and do not imply complete coverage or evidence review."
+}
