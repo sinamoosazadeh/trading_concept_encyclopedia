@@ -1,73 +1,40 @@
 {
   "schema_version": "1.0",
   "concept_categories": [
-    "market_structure",
-    "chart_pattern",
-    "candlestick_pattern",
-    "indicator",
-    "feature",
-    "signal",
-    "setup",
-    "strategy",
-    "execution",
-    "risk_management",
-    "portfolio",
-    "microstructure",
-    "data_methodology",
-    "other"
+    "market_structure", "chart_pattern", "candlestick_pattern", "indicator", "feature",
+    "signal", "setup", "strategy", "execution", "risk_management", "portfolio",
+    "microstructure", "data_methodology", "other"
   ],
   "editorial_statuses": [
-    "candidate",
-    "draft",
-    "needs_sources",
-    "under_review",
-    "reviewed",
-    "deprecated",
-    "merged"
+    "candidate", "draft", "needs_sources", "under_review", "reviewed", "deprecated", "merged"
   ],
   "evidence_statuses": [
-    "unassessed",
-    "descriptive_only",
-    "mixed",
-    "empirical_support",
-    "empirical_null",
-    "contested",
-    "insufficient_evidence"
+    "unassessed", "descriptive_only", "mixed", "empirical_support", "empirical_null",
+    "contested", "insufficient_evidence"
   ],
   "claim_types": [
-    "descriptive",
-    "historical",
-    "causal",
-    "predictive",
-    "empirical",
-    "methodological"
+    "descriptive", "historical", "causal", "predictive", "empirical", "methodological"
   ],
-  "claim_statuses": [
-    "unreviewed",
-    "supported",
-    "contested",
-    "unsupported"
-  ],
+  "claim_statuses": ["unreviewed", "supported", "contested", "unsupported"],
   "source_types": [
-    "primary_artifact",
-    "peer_reviewed_research",
-    "formal_research",
-    "technical_documentation",
-    "specialist_book",
-    "secondary_analysis",
-    "practitioner_material",
-    "informal_discussion",
-    "market_data",
-    "other"
+    "primary_artifact", "peer_reviewed_research", "formal_research", "technical_documentation",
+    "specialist_book", "secondary_analysis", "practitioner_material", "informal_discussion",
+    "market_data", "other"
+  ],
+  "source_levels": [
+    "primary", "formal_research", "technical_reference", "secondary", "practitioner", "other"
   ],
   "relationship_types": [
-    "synonym",
-    "broader_than",
-    "narrower_than",
-    "prerequisite_for",
-    "alternative_to",
-    "often_confused_with",
-    "implemented_as",
-    "related_to"
+    "synonym", "broader_than", "narrower_than", "prerequisite_for", "alternative_to",
+    "often_confused_with", "implemented_as", "related_to"
+  ],
+  "study_statuses": [
+    "proposal", "preregistered", "in_progress", "completed", "replication", "superseded", "withdrawn"
+  ],
+  "study_types": [
+    "exploratory", "confirmatory", "replication", "robustness", "ablation", "execution_analysis", "other"
+  ],
+  "bias_statuses": [
+    "not_assessed", "not_applicable", "mitigated", "residual_risk", "identified"
   ]
 }
