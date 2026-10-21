@@ -19,6 +19,9 @@ An evidence-first, version-controlled reference for trading concepts, price-acti
 
 ## Repository map
 
+The original Persian source artifact is preserved under `legacy/source/` and verified by SHA-256. The prior inventory remains a migration input, not an evidence-reviewed corpus. See `legacy/README.md`, `docs/ROADMAP.md`, and `docs/VALIDATION_MODEL.md` before promoting candidate content.
+
+
 - `docs/` — scope, methodology, evidence policy, editorial standards, QA, and governance.
 - `schema/` — machine-readable schemas for concepts, sources, and claims.
 - `registry/` — taxonomy, controlled vocabularies, and lifecycle states.
