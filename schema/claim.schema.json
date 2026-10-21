@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/trading-concept-encyclopedia/schema/claim.schema.json",
+  "$id": "https://github.com/sinamoosazadeh/trading_concept_encyclopedia/schema/claim.schema.json",
   "title": "Trading concept claim",
   "type": "object",
   "additionalProperties": false,
