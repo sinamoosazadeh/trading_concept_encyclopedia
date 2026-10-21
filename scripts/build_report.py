@@ -15,10 +15,11 @@ from trading_encyclopedia.validation import read_json, validate_repository  # no
 
 
 def load_records(directory: Path) -> tuple[list[tuple[Path, dict[str, Any]]], list[str]]:
+    """Load object-valued JSON records and report unreadable/non-object files."""
     records: list[tuple[Path, dict[str, Any]]] = []
     errors: list[str] = []
-    if not directory.exists():
-        return records, [directory.name]
+    if not directory.is_dir():
+        return records, [directory.relative_to(ROOT).as_posix()]
     for path in sorted(directory.rglob("*.json")):
         try:
             record = read_json(path)
@@ -34,6 +35,14 @@ def load_records(directory: Path) -> tuple[list[tuple[Path, dict[str, Any]]], li
 def counts(records: list[tuple[Path, dict[str, Any]]], field: str) -> dict[str, int]:
     tally = Counter(str(record.get(field, "missing")) for _, record in records)
     return dict(sorted(tally.items()))
+
+
+def get_list(value: Any, key: str) -> list[Any]:
+    """Return a list-valued property only; malformed values are handled by validation."""
+    if not isinstance(value, dict):
+        return []
+    candidate = value.get(key, [])
+    return candidate if isinstance(candidate, list) else []
 
 
 def main() -> int:
@@ -54,14 +63,38 @@ def main() -> int:
     claim_records = [
         claim
         for _, concept in concepts
-        for claim in concept.get("claims", [])
-        if isinstance(concept.get("claims", []), list) and isinstance(claim, dict)
+        for claim in get_list(concept, "claims")
+        if isinstance(claim, dict)
     ]
     diagnostics = validate_repository(ROOT)
     diagnostic_counts = Counter(item.severity for item in diagnostics)
 
+    concepts_without_sources = sorted(
+        record.get("id", path.relative_to(ROOT).as_posix())
+        for path, record in concepts
+        if not get_list(record, "sources")
+    )
+    concepts_without_claims = sorted(
+        record.get("id", path.relative_to(ROOT).as_posix())
+        for path, record in concepts
+        if not get_list(record, "claims")
+    )
+    predictive_claims_without_refs = sorted(
+        f"{record.get('id', path.stem)}:{claim.get('id', 'missing-id')}"
+        for path, record in concepts
+        for claim in get_list(record, "claims")
+        if isinstance(claim, dict)
+        and claim.get("type", claim.get("claim_type")) == "predictive"
+        and not (get_list(claim, "supporting_source_ids") or get_list(claim, "contrary_source_ids"))
+    )
+    studies_without_sources = sorted(
+        record.get("id", path.relative_to(ROOT).as_posix())
+        for path, record in studies
+        if not (get_list(record, "source_ids") or get_list(record.get("data"), "source_ids"))
+    )
+
     report = {
-        "report_version": "1.1",
+        "report_version": "1.2",
         "inventory": {
             "concept_count": len(concepts),
             "source_count": len(source_records),
@@ -73,24 +106,13 @@ def main() -> int:
             "claim_status_counts": dict(sorted(Counter(str(claim.get("status", "missing")) for claim in claim_records).items())),
             "claim_type_counts": dict(sorted(Counter(str(claim.get("type", claim.get("claim_type", "missing"))) for claim in claim_records).items())),
             "study_status_counts": counts(studies, "study_status"),
-            "study_type_counts": counts(studies, "study_type")
+            "study_type_counts": counts(studies, "study_type"),
         },
         "coverage_gaps": {
-            "concepts_without_sources": sorted(record.get("id", path.relative_to(ROOT).as_posix()) for path, record in concepts if not record.get("sources")),
-            "concepts_without_claims": sorted(record.get("id", path.relative_to(ROOT).as_posix()) for path, record in concepts if not record.get("claims")),
-            "predictive_claims_without_source_refs": sorted(
-                f"{record.get('id', path.stem)}:{claim.get('id', 'missing-id')}"
-                for path, record in concepts
-                for claim in record.get("claims", [])
-                if isinstance(claim, dict)
-                and claim.get("type", claim.get("claim_type")) == "predictive"
-                and not (claim.get("supporting_source_ids") or claim.get("contrary_source_ids"))
-            ),
-            "studies_without_sources": sorted(
-                record.get("id", path.relative_to(ROOT).as_posix())
-                for path, record in studies
-                if not (record.get("source_ids") or (record.get("data", {}) or {}).get("source_ids"))
-            )
+            "concepts_without_sources": concepts_without_sources,
+            "concepts_without_claims": concepts_without_claims,
+            "predictive_claims_without_source_refs": predictive_claims_without_refs,
+            "studies_without_sources": studies_without_sources,
         },
         "integrity": {
             "validation_error_count": diagnostic_counts["error"],
@@ -98,12 +120,12 @@ def main() -> int:
             "validation_info_count": diagnostic_counts["info"],
             "validation_diagnostics": [item.as_dict() for item in diagnostics],
             "unreadable_concept_or_study_files": sorted(concept_errors + study_errors),
-            "source_registry_error": source_registry_error
+            "source_registry_error": source_registry_error,
         },
         "interpretation": (
             "This deterministic snapshot counts checked-in metadata and reports validation diagnostics. "
             "It does not measure domain coverage, source credibility, empirical validity, or strategy profitability."
-        )
+        ),
     }
     out_path = ROOT / "reports" / "registry_report.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
