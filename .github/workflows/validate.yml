@@ -8,9 +8,14 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -18,13 +23,37 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install package and dev dependencies
+          cache: pip
+      - name: Install package and development dependencies
         run: python -m pip install -e ".[dev]"
-      - name: Run tests
+      - name: Compile project Python files
+        run: python -m compileall -q src scripts tests
+      - name: Run automated tests
         run: python -m pytest
-      - name: Validate registry
-        run: python scripts/validate_registry.py
-      - name: Build metadata report
-        run: python scripts/build_report.py
-      - name: Ensure report is generated
-        run: test -s reports/registry_report.json
+      - name: Validate canonical registry
+        run: python scripts/validate_registry.py --json
+      - name: Generate deterministic metadata report
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/build_report.py > /tmp/report-run-1.json
+          sha256sum reports/registry_report.json | cut -d ' ' -f 1 > /tmp/report-hash-1.txt
+          python scripts/build_report.py > /tmp/report-run-2.json
+          sha256sum reports/registry_report.json | cut -d ' ' -f 1 > /tmp/report-hash-2.txt
+          cmp /tmp/report-hash-1.txt /tmp/report-hash-2.txt
+          cmp /tmp/report-run-1.json /tmp/report-run-2.json
+          test -s reports/registry_report.json
+      - name: Show generated report summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("reports/registry_report.json").read_text(encoding="utf-8"))
+          print(json.dumps({
+              "inventory": report.get("inventory", {}),
+              "integrity": {
+                  "validation_error_count": report.get("integrity", {}).get("validation_error_count"),
+                  "validation_warning_count": report.get("integrity", {}).get("validation_warning_count"),
+              },
+          }, ensure_ascii=False, indent=2))
+          PY
